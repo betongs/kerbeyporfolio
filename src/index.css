@@ -8,14 +8,12 @@ html {
 
 body {
   font-family: 'Inter', sans-serif;
+  @apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100;
 }
 
 .backdrop-blur-sm {
   backdrop-filter: blur(8px);
 }
-
-/* .@apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100;
-} */
 
 .fade-in {
   animation: fadeIn 0.5s ease-in;

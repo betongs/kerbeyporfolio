@@ -49,21 +49,21 @@ function App() {
               <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors">
                 Hire Me
               </button>
-              <button className="border-2 border-gray-300 px-8 py-3 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors">
-                WhatsApp
-              </button>
             </div>
           </div>
           <div className="relative">
-            {/* Add your profile image here */}
-            <div className="w-[500px] h-[500px] bg-blue-600/10 rounded-full relative overflow-hidden">
-              {/* You can add your image here */}
-            </div>
-            <div className="absolute top-10 right-0 bg-blue-600 text-white px-6 py-2 rounded-full">
-              PoS Specialist
-            </div>
-            <div className="absolute bottom-10 left-0 bg-blue-600 text-white px-6 py-2 rounded-full">
-              Developer
+            <div className="w-[600px] h-[600px] bg-blue-50 rounded-full relative">
+              <img 
+                src="/src/pogiko.jpg" 
+                alt="Kerbey Campos" 
+                className="absolute inset-0 w-full h-full object-cover rounded-full"
+              />
+              <div className="absolute top-4 right-4 bg-blue-600 text-white px-6 py-2 rounded-full z-10">
+                PoS Specialist
+              </div>
+              <div className="absolute bottom-20 left-0 bg-blue-600 text-white px-6 py-2 rounded-full z-10">
+                Developer
+              </div>
             </div>
           </div>
         </div>
