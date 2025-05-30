@@ -54,7 +54,7 @@ function App() {
           <div className="relative">
             <div className="w-[600px] h-[600px] bg-blue-50 rounded-full relative">
               <img 
-                src="/images/pogiko.jpg" 
+                src="\assets\images\pogiko.jpg" 
                 alt="Kerbey Campos" 
                 className="absolute inset-0 w-full h-full object-cover rounded-full"
               />
