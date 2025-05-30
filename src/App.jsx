@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 function App() {
   const [darkMode, setDarkMode] = useState(false)
   const [currentSection, setCurrentSection] = useState('home')
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
     if (darkMode) {
@@ -34,74 +35,165 @@ function App() {
     setCurrentSection(section)
   }
 
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 overflow-hidden">
       {/* Navigation */}
       <nav className="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-sm dark:bg-gray-900/80 py-4">
-        <div className="container mx-auto px-4 flex justify-between items-center">
-          <div className="text-2xl font-bold text-blue-600">KC</div>
-          <div className="flex items-center space-x-8">
-            <motion.a 
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => handleNavigation('home')}
-              className={`cursor-pointer hover:text-blue-600 transition-colors ${currentSection === 'home' ? 'text-blue-600' : ''}`}
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center">
+            <div className="text-2xl font-bold text-blue-600">KC</div>
+            
+            {/* Mobile Menu Button */}
+            <button
+              onClick={toggleMenu}
+              className="md:hidden p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
             >
-              Home
-            </motion.a>
-            <motion.a 
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => handleNavigation('services')}
-              className={`cursor-pointer hover:text-blue-600 transition-colors ${currentSection === 'services' ? 'text-blue-600' : ''}`}
-            >
-              Services
-            </motion.a>
-            <motion.a 
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => handleNavigation('about')}
-              className={`cursor-pointer hover:text-blue-600 transition-colors ${currentSection === 'about' ? 'text-blue-600' : ''}`}
-            >
-              About me
-            </motion.a>
-            <motion.a 
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => handleNavigation('projects')}
-              className={`cursor-pointer hover:text-blue-600 transition-colors ${currentSection === 'projects' ? 'text-blue-600' : ''}`}
-            >
-              Projects
-            </motion.a>
-            <motion.button 
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setDarkMode(!darkMode)}
-              className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-            >
-              {darkMode ? (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-                </svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                </svg>
-              )}
-            </motion.button>
-            <motion.button 
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => handleNavigation('contact')}
-              className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors"
-            >
-              Contact me
-            </motion.button>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+              </svg>
+            </button>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              <motion.a 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleNavigation('home')}
+                className={`cursor-pointer hover:text-blue-600 transition-colors ${currentSection === 'home' ? 'text-blue-600' : ''}`}
+              >
+                Home
+              </motion.a>
+              <motion.a 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleNavigation('services')}
+                className={`cursor-pointer hover:text-blue-600 transition-colors ${currentSection === 'services' ? 'text-blue-600' : ''}`}
+              >
+                Services
+              </motion.a>
+              <motion.a 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleNavigation('about')}
+                className={`cursor-pointer hover:text-blue-600 transition-colors ${currentSection === 'about' ? 'text-blue-600' : ''}`}
+              >
+                About me
+              </motion.a>
+              <motion.a 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleNavigation('projects')}
+                className={`cursor-pointer hover:text-blue-600 transition-colors ${currentSection === 'projects' ? 'text-blue-600' : ''}`}
+              >
+                Projects
+              </motion.a>
+              <motion.button 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setDarkMode(!darkMode)}
+                className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+              >
+                {darkMode ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                  </svg>
+                )}
+              </motion.button>
+              <motion.button 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleNavigation('contact')}
+                className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors"
+              >
+                Contact me
+              </motion.button>
+            </div>
           </div>
+
+          {/* Mobile Navigation Menu */}
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ 
+              height: isMenuOpen ? 'auto' : 0,
+              opacity: isMenuOpen ? 1 : 0
+            }}
+            transition={{ duration: 0.3 }}
+            className={`md:hidden overflow-hidden ${isMenuOpen ? 'mt-4' : ''}`}
+          >
+            <div className="flex flex-col space-y-4 py-4">
+              <motion.a 
+                onClick={() => {
+                  handleNavigation('home')
+                  setIsMenuOpen(false)
+                }}
+                className={`cursor-pointer hover:text-blue-600 transition-colors text-center ${currentSection === 'home' ? 'text-blue-600' : ''}`}
+              >
+                Home
+              </motion.a>
+              <motion.a 
+                onClick={() => {
+                  handleNavigation('services')
+                  setIsMenuOpen(false)
+                }}
+                className={`cursor-pointer hover:text-blue-600 transition-colors text-center ${currentSection === 'services' ? 'text-blue-600' : ''}`}
+              >
+                Services
+              </motion.a>
+              <motion.a 
+                onClick={() => {
+                  handleNavigation('about')
+                  setIsMenuOpen(false)
+                }}
+                className={`cursor-pointer hover:text-blue-600 transition-colors text-center ${currentSection === 'about' ? 'text-blue-600' : ''}`}
+              >
+                About me
+              </motion.a>
+              <motion.a 
+                onClick={() => {
+                  handleNavigation('projects')
+                  setIsMenuOpen(false)
+                }}
+                className={`cursor-pointer hover:text-blue-600 transition-colors text-center ${currentSection === 'projects' ? 'text-blue-600' : ''}`}
+              >
+                Projects
+              </motion.a>
+              <motion.button 
+                onClick={() => {
+                  handleNavigation('contact')
+                  setIsMenuOpen(false)
+                }}
+                className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors w-full"
+              >
+                Contact me
+              </motion.button>
+              <div className="flex justify-center">
+                <motion.button 
+                  onClick={() => setDarkMode(!darkMode)}
+                  className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                >
+                  {darkMode ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                    </svg>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                    </svg>
+                  )}
+                </motion.button>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </nav>
 
-      {/* Main Content with AnimatePresence for page transitions */}
+      {/* Main Content */}
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSection}
@@ -113,7 +205,7 @@ function App() {
         >
           {currentSection === 'home' && (
             <section className="pt-32 pb-20 px-4">
-              <div className="container mx-auto flex items-center justify-between">
+              <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
                 <div className="max-w-2xl">
                   <div className="inline-block border-2 border-blue-600 rounded-lg px-4 py-2 mb-6">
                     <span className="text-xl">Hello !</span>
@@ -136,21 +228,21 @@ function App() {
                     </motion.button>
                   </div>
                 </div>
-                <div className="relative">
-                  <div className="w-[600px] h-[600px] bg-blue-50 rounded-full relative">
+                <div className="relative w-full md:w-auto">
+                  <div className="w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-blue-50 rounded-full relative mx-auto">
                     <img 
                       src="/images/pogiko.jpg" 
                       alt="Kerbey Campos" 
                       className="absolute inset-0 w-full h-full object-cover rounded-full"
                     />
                     <motion.div 
-                      className="absolute top-4 right-4 bg-blue-600 text-white px-6 py-2 rounded-full z-10"
+                      className="absolute top-2 md:top-4 right-2 md:right-4 bg-blue-600 text-white px-3 md:px-6 py-1 md:py-2 rounded-full z-10 text-sm md:text-base"
                       whileHover={{ scale: 1.1 }}
                     >
                       PoS Specialist
                     </motion.div>
                     <motion.div 
-                      className="absolute bottom-20 left-0 bg-blue-600 text-white px-6 py-2 rounded-full z-10"
+                      className="absolute bottom-10 md:bottom-20 left-0 bg-blue-600 text-white px-3 md:px-6 py-1 md:py-2 rounded-full z-10 text-sm md:text-base"
                       whileHover={{ scale: 1.1 }}
                     >
                       Developer
